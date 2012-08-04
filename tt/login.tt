@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+
+
+<div class="box">
+  <form method="post" action="/results.tt" id="loginForm">
+    <div class="title">LOGIN</div>
+
+      <label class="login">username</label>
+      <label class="login">password</label>
+      <div class="clear"></div>
+
+      <input class="login" id="username" name="username" type="text">
+      <input class="login" id="password" name="password" type="text">
+      <button id="login" type="submit">login</button>
+      <div class="clear"></div>
+
+    </div>
+  </form>
+</div>
+
+  
+  </body>
+</html>

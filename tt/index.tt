@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+  
+    <div class="box">
+
+    <div class="top">
+      <h1>oogle</h1><h2>image search.  ogle with oogle.</h2>
+      <div class="clear"></div>
+    </div>
+
+    <form action="/results.tt">
+      <input id="searchInput" type="text"></input>
+      <button id="searchButton">search</button>
+    </form>
+
+    </div>
+  
+  </body>
+</html>

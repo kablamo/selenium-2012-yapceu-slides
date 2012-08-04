@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+  
+    <div class="box">
+
+      <div class="header"><h1>oogle</h1></div>
+      <form class="searchForm" action="/results.tt">
+        <input id="searchInput" type="text" value="cat pictures"></input>
+        <button id="searchButton">search</button>
+        <a class="login" href="/login.tt">login</a>
+        <div class="clear"></div>
+      </form>
+
+
+      <div id="howMany">
+         2 bajillion results
+      </div>
+
+[% i = 5 %]
+[% WHILE i < 10 %]
+      <div class="result">
+        <a href="cat">cat picture [% i %]</a>
+      </div>
+[% i = i + 1 %]
+[% END %]
+
+      <br><br><br><br>
+      <a class="paging" href="results.tt">1</a>
+      <a class="paging" >2</a>
+      <a class="paging" href="moreResults.tt">3</a>
+      <a class="paging" href="moreResults.tt">4</a>
+      <a class="paging" href="moreResults.tt">&raquo;</a>
+
+    </div>
+  
+  </body>
+</html>

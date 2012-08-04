@@ -1,0 +1,144 @@
+body {font-size: 10pt; font-family: sans-serif; color: #333; margin: 0}
+
+.top {
+ color: #333;
+ width: 100%;
+ padding: 4em;
+ padding-top: 2em;
+ padding-bottom: 2em;
+ margin: 0;
+ margin-top: 2em;
+}
+.top h1 {
+ float: left;
+ font-size: 6em;
+}
+.top h2 {
+ float: left;
+ padding-top: 1em;
+ padding-left: 2em;
+ font-size: 2em;
+}
+a.login {
+ padding-left: 3em;
+ font-size: 1.3em;
+}
+
+form {margin: 0; padding: 0}
+input, textarea, label {
+ margin: .3em;
+ margin-right: 2em;
+ margin-left: 0;
+ padding: .5em;
+ font: 10pt sans-serif;
+ -moz-border-radius: 4px;
+ -webkit-border-radius: 4px;
+ background: #fff;
+ color: #333;
+ float: left;
+ border: solid 1px #aaa;
+}
+label {
+ border: 0px; 
+ margin-bottom:0;
+ padding-left: 0em; 
+ padding-right: 1em;
+ padding-bottom: .1em;
+ width: 8em;
+ font-size: 2em;
+}
+select {
+ padding: .5em;
+ padding-bottom: .4em;
+ font: 10pt sans-serif;
+ font-size: 1em;
+ -moz-border-radius: 4px;
+ -webkit-border-radius: 4px;
+ background: #fff;
+ color: #333;
+ border:  solid 1px #777;
+}
+input {background: #eee; font-size: 1.5em}
+input.withPadding, label.withPadding {padding: .5em}
+
+button, button:visited, .btn, .btn:visited {
+ font: 10pt sans-serif;
+ display: inline-block;
+ padding-top: .5em;
+ padding-left: 1.1em;
+ padding-right: 1.1em;
+ padding-bottom: .5em;
+ margin: .3em;
+ margin-left: 0;
+ margin-right: .6em;
+ color: #333;
+ text-decoration: none;
+ -moz-border-radius: 4px;
+ -webkit-border-radius: 4px;
+ text-shadow: 0 -0px 0px rgba(0,0,0,0.25);
+ border: solid 1px #999;
+ position: relative;
+ cursor: pointer;
+ font-size: 1.5em;
+ font-weight: bold;
+ background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #ccc), color-stop(.95, #fff));
+ background: -moz-linear-gradient(bottom, #ccc, #fff);
+}
+button:hover, .btn:hover  {
+ border: solid 1px #666;
+}
+button:active, .btn:active {
+background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #aaa), color-stop(.05, #eee));
+background: -moz-linear-gradient(bottom, #aaa, #eee);
+}
+.wide {padding-left: 2.5em; padding-right: 2.5em}
+
+
+
+.box {
+ margin: 4em;
+ background: transparent;
+}
+.title {
+ font-size: 8em;
+}
+.header {
+ float: left;
+ margin-top: 0em;
+ font-size: 2em;
+}
+.login {
+}
+#howMany {
+ margin-top: 2em;
+ margin-bottom: 2em;
+ font-size: 2em;
+}
+.result {
+ margin-top: 1em;
+ margin-bottom: 0em;
+ font-size: 2em;
+}
+.paging {
+ margin-top 0em;
+ margin-bottom: 2em;
+ font-size: 2em;
+}
+
+#searchForm {
+ float: left;
+}
+#searchInput {
+ float: left;
+ margin-left: 3em;
+ margin-right: 0;
+ -moz-border-radius: 0px;
+ -webkit-border-radius: 0px;
+ width: 20em;
+}
+#searchButton {
+ float: left;
+ margin-left: 0;
+ -moz-border-radius: 0px;
+ -webkit-border-radius: 0px;
+}

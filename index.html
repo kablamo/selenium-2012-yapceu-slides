@@ -1,0 +1,523 @@
+<!doctype html>  
+<html lang="en">
+ <head>
+  <meta charset="utf-8">
+  <title>reveal.js - HTML5 Presentations</title>
+  <meta name="description" content="Selenium and Perl">
+  <meta name="author" content="Eric Johnson (@kablamo)">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/print.css" type="text/css" media="print">
+  <link rel="stylesheet" href="lib/css/solarized_dark.css">
+ </head>
+ <body>
+        
+ <div class="reveal">
+
+  <!-- Used to fade in a background when a specific slide state is reached -->
+  <div class="state-background"></div>
+            
+  <div class="slides">
+   <section>
+    <br>
+    <h1>Selenium<br>and<br>Perl</h1>
+    <h4>by Eric Johnson (@kablamo)</h4>
+    <script>if( navigator.userAgent.match( /(iPhone|iPad|iPod|Android)/i ) ) document.write( '<p style="color: rgba(0,0,0,0.3); text-shadow: none;">('+'Tap to navigate'+')</p>' );</script>
+   </section>
+   
+   <section>
+    <h2>What is Selenium?</h2>
+    <ul>
+     <li class="fragment">A tool for testing your website</li>
+     <li class="fragment">Written in Java</li>
+     <li class="fragment">Similar to Test::WWW::Mechanize</li>
+     <li class="fragment">But tests at the browser level</li>
+     <li class="fragment">Exercises your JavaScript</li>
+     <li class="fragment">Tests your site in any browser</li>
+    </ul>
+   </section>
+   
+   <section>
+    <h2>Selenium IDE</h2>
+    <ul>
+     <li class="fragment">Firefox plugin</li>
+     <li class="fragment">Designer can create tests</li>
+     <li class="fragment">Records your actions in the browser</li>
+     <li class="fragment">Replays them</li>
+    </ul>
+   </section>
+   
+   <section>
+    <h2>Demo</h2>
+   </section>
+   
+   <section>
+    <h2>Problems</h2>
+    <ul>
+     <li class="fragment">Unreliable tests</li>
+     <li class="fragment">It's not Perl</li>
+     <li class="fragment">Repetition: can't easily use libraries</li>
+     <li class="fragment">Lack of automation</li>
+    </ul>
+   </section>
+   
+   <section>
+    <h2>Unreliable tests</h2>
+    <ul>
+     <h4 class="fragment">Problem</h4>
+     <div class="fragment">waitForPageToLoad does not handle ajax requests</div><br>
+     <h4 class="fragment">Solution</h4>
+     <div class="fragment">waitForTextPresent</div>
+    </ul>
+   </section>
+   
+   <section>
+    <h2>Problems</h2>
+    <ul>
+     <del><li>Unreliable tests</li></del>
+     <li>It's not Perl</li>
+     <li>Repetition: can't easily use libraries</li>
+     <li>Lack of automation</li>
+    </ul>
+   </section>
+   
+   <section>
+    <h2>Test::WWW::Selenium</h2>
+   </section>
+   
+   <section>
+    <h2>4 ingredients</h2>
+    <ol>
+     <li class="fragment">Perl test</li>
+     <li class="fragment">Selenium server</li>
+     <li class="fragment">Web browser</li>
+     <li class="fragment">Website</li>
+    </ol>
+   </section>
+   
+   <section data-state="code">
+    <pre><code contenteditable class="Perl">use Test::Most;
+use Test::WWW::Selenium;
+
+my $s = Test::WWW::Selenium->new( 
+    host           => "localhost",
+    port           => 4444,
+    browser        => "*firefox",
+    browser_url    => "http://localhost:5000",
+);
+
+$s->open_ok("/index.tt");
+$s->wait_for_page_to_load_ok;
+$s->type_ok(searchInput => "cat pictures");
+$s->click_ok("searchButton");
+$s->wait_for_page_to_load_ok;
+$s->is_text_present_ok('2 bajillion results');
+
+done_testing;</code></pre>
+   </section>
+   
+   <section data-state="code">
+    <pre><code contenteditable class="Perl">use Test::Most;
+use Test::WWW::Selenium;
+
+my $s = Test::WWW::Selenium->new( 
+    host           => "localhost",
+    port           => 4444,
+    browser        => "*firefox",
+    browser_url    => "http://localhost:5000",
+);
+
+$s->open_ok("/index.tt");               sleep 2;
+$s->wait_for_page_to_load_ok;           sleep 2;
+$s->type_ok(searchInput => "cat pics"); sleep 2;
+$s->click_ok("searchButton");           sleep 2;
+$s->wait_for_page_to_load_ok;           sleep 2;
+$s->is_text_present_ok('2 bajillion results');
+
+done_testing;</code></pre>
+   </section>
+   
+   <section>
+    <h2>Problems</h2>
+    <ul>
+     <del><li>Unreliable tests</li></del>
+     <del><li>It's not Perl</li></del>
+     <li>Repetition: can't easily use libraries</li>
+     <li class="fragment">Designers can't easily write tests</li>
+     <li>Lack of automation</li>
+    </ul>
+   </section>
+   
+   <section data-state="code">
+    <pre><code contenteditable class="Perl">use Test::Most;
+use Test::WWW::Selenium;
+
+my $s = Test::WWW::Selenium->new( 
+    host           => "localhost",
+    port           => 4444,
+    browser        => "*firefox",
+    browser_url    => "http://localhost:5000",
+);
+
+$s->open_ok("/index.tt");
+$s->wait_for_page_to_load_ok;
+$s->type_ok(searchInput => "cat pictures");
+$s->click_ok("searchButton");
+$s->wait_for_page_to_load_ok;
+$s->is_text_present_ok('2 bajillion results');
+
+done_testing;</code></pre>
+   </section>
+   
+   <section data-state="code">
+    <pre><code contenteditable class="Perl">use Test::Most;
+use MySelenium;
+
+my $s = MySelenium->new;
+
+$s->open_ok("/index.tt");
+$s->wait_for_page_to_load_ok;
+$s->type_ok(searchInput => "cat pictures");
+$s->click_ok("searchButton");
+$s->wait_for_page_to_load_ok;
+$s->is_text_present_ok('2 bajillion results');
+
+done_testing;</code></pre>
+   </section>
+   
+   <section data-state="code">
+    <pre><code contenteditable class="Perl">package MySelenium;
+use Moose;
+extend 'Test::WWW::Selenium'; </code></pre>
+   </section>
+   
+   <section>
+    <h2>Unfortunately</h2>
+    <div class="fragment">Moose cannot extend non Moose libraries</div>
+   </section>
+   
+   <section>
+    <h2>Fortunately</h2>
+    <div class="fragment">MooseX::NonMoose can extend non Moose libraries</div>
+   </section>
+   
+   <section data-state="code">
+    <pre><code contenteditable class="Perl">package MySelenium;
+use Moose;
+use MooseX::NonMoose;
+extend 'Test::WWW::Selenium'; </code></pre>
+   </section>
+   
+   <section>
+    <h2>Unfortunately</h2>
+    <div class="fragment">MooseX::NonMoose does not work on parents that use AUTOLOAD</div>
+   </section>
+   
+   <section>
+    <h2>Problems</h2>
+    <ul>
+     <del><li>Unreliable tests</li></del>
+     <del><li>It's not Perl</li></del>
+     <li class="fragment">Test::WWW::Selenium !<3 Moose</li>
+     <li>Repetition: can't easily use libraries</li>
+     <li>Designers can't easily write tests</li>
+     <li>Lack of automation</li>
+    </ul>
+   </section>
+   
+   <section>
+    <h2>Fortunately</h2>
+    <div class="fragment">Test::WWW::Selenium::More</div>
+   </section>
+   
+   <section data-state="code">
+    <pre><code contenteditable class="Perl">package MySelenium;
+use Moose;
+extends 'Test::WWW::Selenium::More';
+
+has host        => (...);
+has port        => (...);
+has browser     => (...);
+has browser_url => (
+    is      => 'rw', 
+    isa     => 'Str',
+    default => 'http://localhost:5000'
+);
+
+no Moose; </code></pre>
+   </section>
+   
+   <section data-state="code">
+    <pre><code contenteditable class="Perl">use Test::Most;
+use MySelenium;
+
+my $s = MySelenium->new;
+
+$s->note('Are there enough cat pictures?');
+$s->open_ok("/index.tt");
+$s->type_ok(searchInput => "cat pictures");
+$s->click_ok("searchButton");
+$s->wait_for_page_to_load_ok;
+$s->is_text_present_ok('2 bajillion results');
+
+done_testing;</code></pre>
+   </section>
+   
+   <section data-state="code">
+    <pre><code contenteditable class="Perl">use Test::Most;
+use MySelenium;
+
+my $s = MySelenium->new;
+
+$s->note('Are there enough cat pictures?');
+$s->open_ok("/index.tt");
+$s->type_ok(searchInput => "cat pictures");
+$s->click_ok("searchButton");
+$s->wait_for_page_to_load_ok;
+$s->is_text_present_ok('2 bajillion results');
+
+$s->note('Check results as a logged in user');
+$s->login_ok('bob'); # not in the Selenium API
+$s->is_text_present_ok('2 bajillion results');
+
+done_testing; </code></pre>
+   </section>
+   
+   <section data-state="code">
+    <pre><code contenteditable class="Perl">package MySelenium;
+use Moose;
+extends 'Test::WWW::Selenium::More';
+
+has host        => (...);
+has port        => (...);
+has browser     => (...);
+has browser_url => (is  => 'rw', isa => 'Str', 
+      default => 'http://localhost:5000');
+
+sub login_ok {
+    my ($self, $username, $password) = @_;
+    $self->open_ok('/login.tt');
+    $self->type_ok(username => $username);
+    $self->type_ok(password => $password);
+    $self->click_ok('login');
+}
+
+no Moose;</code></pre>
+   </section>
+   
+   <section data-state="code">
+    <pre><code contenteditable class="Perl">package MySelenium;
+use Moose;
+extends 'Test::WWW::Selenium::More';
+with 'MySelenium::Roles::Authentication';
+
+has host        => (...);
+has port        => (...);
+has browser     => (...);
+has browser_url => (
+    is      => 'rw', 
+    isa     => 'Str', 
+    default => 'http://localhost:5000'
+);
+
+no Moose; </code></pre>
+   </section>
+   
+   <section data-state="code">
+    <pre><code contenteditable class="Perl">package MySelenium;
+use Moose;
+extends 'Test::WWW::Selenium::More';
+with 'MySelenium::Roles::Authentication';
+with 'MySelenium::Roles::Payments';
+# etc
+
+has host        => (...);
+has port        => (...);
+has browser     => (...);
+has browser_url => (
+    is      => 'rw', 
+    isa     => 'Str', 
+    default => 'http://localhost:5000'
+);
+
+no Moose; </code></pre>
+   </section>
+   
+   <section>
+    <h2>Problems</h2>
+    <ul>
+     <del><li>Unreliable tests</li></del>
+     <del><li>It's not Perl</li></del>
+     <del><li>Test::WWW::Selenium !<3 Moose</li></del>
+     <del><li>Repetition: can't easily use libraries</li></del>
+     <li>Designers can't easily write tests</li>
+     <li>Lack of automation</li>
+    </ul>
+   </section>
+   
+   <section>
+    <h2>Test::WWW::Selenium::More</h2>
+    <div class="fragment">Method chaining</div>
+   </section>
+   
+   <section data-state="code">
+    <pre><code contenteditable class="Perl">use Test::Most;
+use MySelenium;
+
+MySelenium->new
+
+  ->note('Are there enough cat pictures?')
+  ->open_ok("/index.tt")
+  ->type_ok(searchInput => "cat pictures")
+  ->click_ok("searchButton")
+  ->wait_for_page_to_load_ok
+  ->is_text_present_ok('2 bajillion results')
+
+  ->note('Check results as a logged in user')
+  ->login_ok('bob') # not in the Selenium API
+  ->is_text_present_ok('2 bajillion results');
+
+done_testing; </code></pre>
+   </section>
+   
+   <section>
+    <h2>Problems</h2>
+    <ul>
+     <del><li>Unreliable tests</li></del>
+     <del><li>It's not Perl</li></del>
+     <del><li>Test::WWW::Selenium !<3 Moose</li></del>
+     <del><li>Repetition: can't easily use libraries</li></del>
+     <li class="del">Designers can't easily write tests</li>
+     <li>Lack of automation</li>
+    </ul>
+   </section>
+   
+   <section>
+    <h2>Jenkins</h2>
+    <ul>
+     <li class="fragment">Written in Java</li>
+     <li class="fragment">cron with a web interface and features</li>
+     <li class="fragment">The moose dev team uses it</li>
+    </ul>
+   </section>
+   
+   <section>
+    <h2>Problems</h2>
+    <ul>
+     <del><li>Unreliable tests</li></del>
+     <del><li>It's not Perl</li></del>
+     <del><li>Test::WWW::Selenium !<3 Moose</li></del>
+     <del><li>Repetition: can't easily use libraries</li></del>
+     <li class="del">Designers can't easily write tests</li>
+     <del><li>Lack of automation</li></del>
+    </ul>
+   </section>
+   
+   <section>
+    <h1>THE END</h1>
+   </section>
+   
+   <section>
+    <h2>Links</h2>
+     <div style="font-size: 36px; text-align: left; line-height: 1em">
+      <br>
+      Test::WWW::Selenium::More<br>
+      <a href="http://github.com/kablamo/Test-WWW-Selenium-More">http://github.com/kablamo/Test-WWW-Selenium-More</a>
+      <br>
+      <br>
+
+      Selenium reference (locators + api)<br>
+      <a href="http://cavaliere.org/sandbox/selenium_api_reference">http://cavaliere.org/sandbox/selenium_api_reference</a>
+      <br>
+      <br>
+
+      This talk<br>
+      <a href="http://kablamo.org/selenium-2012-yapceu-slides">http://kablamo.org/selenium-2012-yapceu-slides</a>
+      <br>
+      <br>
+
+      kablamo<br>
+      <a href="http://kablamo.org">http://kablamo.org</a><br>
+    </div>
+   </section>
+
+   <section>
+    <h2>Bonus slide</h2>
+    <a href="https://saucelabs.com">https://saucelabs.com</a>
+   </section>
+
+  </div>
+
+  <!-- The navigational controls UI -->
+  <aside class="controls">
+      <a class="left" href="#">&#x25C4;</a>
+      <a class="right" href="#">&#x25BA;</a>
+      <a class="up" href="#">&#x25B2;</a>
+      <a class="down" href="#">&#x25BC;</a>
+  </aside>
+
+  <!-- Presentation progress bar -->
+  <div class="progress"><span></span></div>
+            
+ </div>
+
+ <script src="lib/js/head.min.js"></script>
+ <script>
+     // Scripts that should be loaded before initializing
+     var scripts = [];
+
+     // If the browser doesn't support classList, load a polyfill
+     if( !document.body.classList ) {
+         scripts.push( 'lib/js/classList.js' );
+     }
+
+     // Load markdown parser if there are slides defined using markdown
+     if( document.querySelector( '[data-markdown]' ) ) {
+         scripts.push( 'lib/js/showdown.js' );
+         scripts.push( 'lib/js/data-markdown.js' );
+     }
+
+     // If we're runnning the notes server we need to include some additional JS
+     // TODO Is there a better way to determine if we're running the notes server?
+     if( window.location.host === 'localhost:1947' ) {
+         scripts.push( 'socket.io/socket.io.js' );
+         scripts.push( 'plugin/speakernotes/client.js' );
+     }
+
+     scripts.push( 'js/reveal.js' );
+
+     // Load the scripts and, when completed, initialize reveal.js
+     head.js.apply( null, scripts.concat([function() {
+
+         Reveal.addEventListener( 'code', function() {
+             console.log( '"customevent" has fired' );
+         } );
+
+         // Fires each time a new slide is activated
+         Reveal.addEventListener( 'slidechanged', function( event ) {
+             // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+         } );
+
+         // Full list of configuration options available here:
+         // https://github.com/hakimel/reveal.js#configuration
+         Reveal.initialize({
+             controls     : true,
+             progress     : true,
+             history      : true,
+             rollingLinks : false,
+             theme        : 'beige',       // default/neon/beige
+             transition   : 'default' // default/cube/page/concave/linear(2d)
+         });
+
+     }]));
+     
+     // Load highlight.js for syntax highlighting of code samples
+     head.js( 'lib/js/highlight.js', function() { 
+         hljs.initHighlightingOnLoad(); 
+     } );
+ </script>
+ </body>
+</html>

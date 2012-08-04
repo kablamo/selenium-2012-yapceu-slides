@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="minireset.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+
+
+<div class="box">
+  <form method="post" action="/user/loginSubmit" id="loginForm">
+    <div class="title">CREATE ACCOUNT</div>
+
+      <label class="login">username</label>
+      <label class="login">password</label>
+      <div class="clear"></div>
+
+      <input class="login" id="email"    name="username" type="text">
+      <input class="login" id="password" name="password" type="text">
+      <button type="submit">create account</button>
+      <div class="clear"></div>
+
+    </div>
+  </form>
+</div>
+
+  
+  </body>
+</html>
