@@ -212,6 +212,7 @@ body {
 
 .reveal code {
 	font-family: monospace;
+    background: transparent;
 }
 
 .reveal table th, 
